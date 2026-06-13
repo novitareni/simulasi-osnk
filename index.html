@@ -4,16 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulasi Pra-OSNK Informatika SMA</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/dist/solid.js"></script>
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
-            }
-        };
-    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 font-sans text-slate-800">
 
@@ -22,7 +13,8 @@
             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Simulasi Mandiri</span>
             <h1 class="text-3xl font-bold text-slate-900 mt-2">Pra-OSNK Informatika SMA</h1>
             <p class="text-slate-600 mt-1">Materi: Peluang, Berpikir Komputasional, & Kombinatorika</p>
-            <p id="active-student-badge" class="hidden text-sm font-semibold text-emerald-600 mt-3 inline-block bg-emerald-50 border border-emerald-200 px-4 py-1 rounded-full">
+            
+            <p id="active-student-badge" style="display: none;" class="text-sm font-semibold text-emerald-600 mt-3 inline-block bg-emerald-50 border border-emerald-200 px-4 py-1 rounded-full">
                 Peserta: <span id="display-student-name"></span>
             </p>
         </header>
@@ -39,7 +31,7 @@
             </button>
         </div>
 
-        <div id="score-board" class="hidden bg-white border border-emerald-100 shadow-sm rounded-xl p-6 mb-8 text-center animate-fade-in">
+        <div id="score-board" style="display: none;" class="bg-white border border-emerald-100 shadow-sm rounded-xl p-6 mb-8 text-center">
             <h2 class="text-xl font-bold text-slate-900">Hasil Akhir Simulasi</h2>
             <p class="text-slate-500 text-sm mt-1" id="score-owner-name"></p>
             <p class="text-5xl font-black text-emerald-600 my-4" id="final-score">0/6</p>
@@ -49,11 +41,213 @@
             </button>
         </div>
 
-        <div class="space-y-6 hidden" id="quiz-container">
-            <div class="bg-white border border-slate-200 shadow-xs rounded-xl p-6 transition-all" id="q1-card">
+        <div class="space-y-6" id="quiz-container" style="display: none;">
+            <div class="bg-white border border-slate-200 shadow-sm rounded-xl p-6 transition-all" id="q1-card">
                 <div class="flex justify-between items-center mb-3">
                     <span class="text-sm font-bold text-blue-600">SOAL 1</span>
                     <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded font-medium">Kombinatorika (Pigeonhole)</span>
                 </div>
                 <p class="text-slate-800 font-medium leading-relaxed mb-4">
-                    Dalam
+                    Dalam sebuah laci terdapat 5 kaos kaki berwarna merah, 4 kaos kaki berwarna biru, dan 3 kaos kaki berwarna hijau. Jika Andi mengambil kaos kaki secara acak satu per satu tanpa pengembalian, berapakah jumlah minimal kaos kaki yang harus diambil Andi untuk memastikan bahwa ia mendapatkan setidaknya sepasang kaos kaki dengan warna yang sama?</p>
+                <div class="space-y-2" id="q1-options">
+                    <button onclick="checkAnswer(1, 0, true)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">A. 4</button>
+                    <button onclick="checkAnswer(1, 1, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">B. 3</button>
+                    <button onclick="checkAnswer(1, 2, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">C. 5</button>
+                    <button onclick="checkAnswer(1, 3, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">D. 7</button>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100" id="q1-rationale" style="display: none;">
+                    <p class="text-sm text-slate-600"><strong class="text-slate-900">Pembahasan:</strong> Berdasarkan Pigeonhole Principle (Prinsip Sarang Burung Merpati), karena hanya ada 3 jenis warna (merah, biru, hijau), maka pengambilan ke-4 pasti akan menghasilkan warna yang sama dengan salah satu dari tiga pengambilan pertama.</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 shadow-sm rounded-xl p-6 transition-all" id="q2-card">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm font-bold text-blue-600">SOAL 2</span>
+                    <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded font-medium">Berpikir Komputasional (Rekurensi)</span>
+                </div>
+                <p class="text-slate-800 font-medium leading-relaxed mb-4">
+                    Berapa banyak string biner (terdiri dari karakter '0' atau '1') dengan panjang 8 yang tidak memuat dua karakter '0' saling berdekatan?
+                </p>
+                <div class="space-y-2" id="q2-options">
+                    <button onclick="checkAnswer(2, 0, true)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">A. 55</button>
+                    <button onclick="checkAnswer(2, 1, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">B. 34</button>
+                    <button onclick="checkAnswer(2, 2, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">C. 89</button>
+                    <button onclick="checkAnswer(2, 3, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">D. 64</button>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100" id="q2-rationale" style="display: none;">
+                    <p class="text-sm text-slate-600"><strong class="text-slate-900">Pembahasan:</strong> Banyaknya string biner panjang n tanpa '00' berturut-turut mengikuti pola bilangan Fibonacci. Untuk panjang 1 ada 2, panjang 2 ada 3, dan seterusnya hingga panjang 8 adalah suku ke-9 dari pola ini, yaitu 55.</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 shadow-sm rounded-xl p-6 transition-all" id="q3-card">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm font-bold text-blue-600">SOAL 3</span>
+                    <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded font-medium">Peluang Diskrit</span>
+                </div>
+                <p class="text-slate-800 font-medium leading-relaxed mb-4">
+                    Sebuah papan catur berukuran 3x3 ingin diisi dengan angka 0 atau 1 pada setiap kotaknya. Berapakah peluang bahwa jumlah angka pada setiap baris dan setiap kolom di papan catur tersebut bernilai genap?
+                </p>
+                <div class="space-y-2" id="q3-options">
+                    <button onclick="checkAnswer(3, 0, true)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">A. 1/16</button>
+                    <button onclick="checkAnswer(3, 1, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">B. 1/8</button>
+                    <button onclick="checkAnswer(3, 2, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">C. 1/32</button>
+                    <button onclick="checkAnswer(3, 3, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">D. 1/64</button>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100" id="q3-rationale" style="display: none;">
+                    <p class="text-sm text-slate-600"><strong class="text-slate-900">Pembahasan:</strong> Total kemungkinan pengisian papan adalah 2^9 = 512. Kotak 2x2 pertama (4 kotak) bebas diisi apa saja (2^4 = 16 cara), sedangkan sisa kotak di baris ke-3 dan kolom ke-3 nilainya akan terikat secara tunggal agar jumlahnya genap. Peluangnya adalah 16/512 = 1/16.</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 shadow-sm rounded-xl p-6 transition-all" id="q4-card">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm font-bold text-blue-600">SOAL 4</span>
+                    <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded font-medium">Berpikir Komputasional (Teori Graf)</span>
+                </div>
+                <p class="text-slate-800 font-medium leading-relaxed mb-4">
+                    Terdapat 5 buah kota: A, B, C, D, dan E. Banyaknya jalan dua arah yang menghubungkan kota-kota tersebut adalah sebagai berikut: A-B (2 jalan), B-C (3 jalan), C-D (2 jalan), D-E (3 jalan), dan A-C (1 jalan). Jika seseorang ingin berjalan dari kota A ke kota E tanpa melalui kota yang sama lebih dari sekali, ada berapa banyak rute berbeda yang dapat ditempuh?
+                </p>
+                <div class="space-y-2" id="q4-options">
+                    <button onclick="checkAnswer(4, 0, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">A. 21</button>
+                    <button onclick="checkAnswer(4, 1, true)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">B. 42</button>
+                    <button onclick="checkAnswer(4, 2, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">C. 15</button>
+                    <button onclick="checkAnswer(4, 3, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">D. 18</button>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100" id="q4-rationale" style="display: none;">
+                    <p class="text-sm text-slate-600"><strong class="text-slate-900">Pembahasan:</strong> Ada dua variasi jalur kota: Jalur 1 (A-C-D-E) memiliki cara 1 x 2 x 3 = 6. Jalur 2 (A-B-C-D-E) memiliki cara 2 x 3 x 2 x 3 = 36. Total rute unik tanpa pengulangan kota adalah 6 + 36 = 42.</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 shadow-sm rounded-xl p-6 transition-all" id="q5-card">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm font-bold text-blue-600">SOAL 5</span>
+                    <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded font-medium">Kombinatorika (Kombinasi Grid)</span>
+                </div>
+                <p class="text-slate-800 font-medium leading-relaxed mb-4">
+                    Dalam sebuah permainan logika, sebuah robot berdiri di titik (0,0) pada koordinat Kartesius. Robot hanya dapat melangkah 1 unit ke kanan (X+1) atau 1 unit ke atas (Y+1) setiap detiknya. Berapa banyak cara bagi robot tersebut untuk berjalan menuju titik (4,3) dengan syarat robot tersebut harus melewati titik (2,1)?
+                </p>
+                <div class="space-y-2" id="q5-options">
+                    <button onclick="checkAnswer(5, 0, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">A. 30</button>
+                    <button onclick="checkAnswer(5, 1, true)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">B. 18</button>
+                    <button onclick="checkAnswer(5, 2, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">C. 35</button>
+                    <button onclick="checkAnswer(5, 3, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">D. 12</button>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100" id="q5-rationale" style="display: none;">
+                    <p class="text-sm text-slate-600"><strong class="text-slate-900">Pembahasan:</strong> Banyak cara dari (0,0) ke (2,1) adalah 3 cara. Banyak cara dari (2,1) ke (4,3) adalah memindahkan koordinat sejauh 2 kekanan dan 2 keatas, yaitu 6 cara. Total kombinasi jalur adalah 3 x 6 = 18.</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-slate-200 shadow-sm rounded-xl p-6 transition-all" id="q6-card">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-sm font-bold text-blue-600">SOAL 6</span>
+                    <span class="bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded font-medium">Berpikir Komputasional (Algoritma)</span>
+                </div>
+                <p class="text-slate-800 font-medium leading-relaxed mb-4">
+                    Pak Dengklek memiliki 7 permata berharga yang identik secara bentuk dan ukuran, namun salah satu dari permata tersebut adalah permata palsu yang memiliki berat lebih ringan daripada 6 permata asli lainnya. Pak Dengklek memiliki sebuah timbangan neraca (dua lengan). Berapakah jumlah minimum penimbangan yang diperlukan Pak Dengklek untuk memastikan ia menemukan satu permata palsu tersebut?
+                </p>
+                <div class="space-y-2" id="q6-options">
+                    <button onclick="checkAnswer(6, 0, true)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">A. 2</button>
+                    <button onclick="checkAnswer(6, 1, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">B. 3</button>
+                    <button onclick="checkAnswer(6, 2, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">C. 1</button>
+                    <button onclick="checkAnswer(6, 3, false)" class="w-full text-left p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer">D. 4</button>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-100" id="q6-rationale" style="display: none;">
+                    <p class="text-sm text-slate-600"><strong class="text-slate-900">Pembahasan:</strong> Dengan membagi permata menjadi 3 kelompok (2, 2, 3). Timbang kelompok pertama (2 vs 2). Jika seimbang, palsu ada di kelompok sisa (3 permata). Dari 3 permata, ambil 2 dan timbang (1 vs 1). Jika seimbang, yang tersisa palsu. Proses ini hanya butuh maksimal 2 kali penimbangan (Teknik Ternary Search/Divide & Conquer).</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-12 text-center text-xs text-slate-400">
+            <p>&copy; 2026 Simulasi Mandiri OSNK Komputer/Informatika SMA.</p>
+        </footer>
+    </div>
+
+    <script>
+        let studentName = "";
+        let answeredCount = 0;
+        let correctCount = 0;
+        const totalQuestions = 6;
+        const state = {}; 
+
+        function mulaiSimulasi() {
+            const nameInput = document.getElementById('input-name').value.trim();
+            
+            if (nameInput === "") {
+                alert("Harap masukkan nama Anda terlebih dahulu sebelum memulai!");
+                return;
+            }
+
+            studentName = nameInput;
+
+            // Menggunakan gaya modifikasi display native yang jauh lebih aman
+            document.getElementById('auth-card').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('display-student-name').textContent = studentName;
+            document.getElementById('active-student-badge').style.display = 'inline-block';
+        }
+
+        function checkAnswer(questionNum, optionIdx, isCorrect) {
+            if (state[questionNum] !== undefined) return;
+            
+            state[questionNum] = isCorrect;
+            answeredCount++;
+
+            const optionsContainer = document.getElementById(`q${questionNum}-options`);
+            const buttons = optionsContainer.getElementsByTagName('button');
+            const rationale = document.getElementById(`q${questionNum}-rationale`);
+            const card = document.getElementById(`q${questionNum}-card`);
+
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('hover:bg-slate-50', 'cursor-pointer');
+                buttons[i].disabled = true;
+                
+                if (i === optionIdx) {
+                    if (isCorrect) {
+                        buttons[i].classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-700', 'font-semibold');
+                        correctCount++;
+                    } else {
+                        buttons[i].classList.add('bg-rose-50', 'border-rose-500', 'text-rose-700');
+                    }
+                }
+            }
+
+            rationale.style.display = 'block';
+            
+            if (isCorrect) {
+                card.classList.add('border-emerald-200', 'bg-emerald-50/10');
+            } else {
+                card.classList.add('border-rose-200', 'bg-rose-50/10');
+            }
+
+            if (answeredCount === totalQuestions) {
+                showFinalScore();
+            }
+        }
+
+        function showFinalScore() {
+            const scoreBoard = document.getElementById('score-board');
+            const finalScoreTxt = document.getElementById('final-score');
+            const commentaryTxt = document.getElementById('score-commentary');
+            const ownerNameTxt = document.getElementById('score-owner-name');
+
+            ownerNameTxt.innerHTML = `Nama Peserta: <strong class="text-slate-800">${studentName}</strong>`;
+            finalScoreTxt.textContent = `${correctCount} / ${totalQuestions}`;
+            
+            let comment = "";
+            if (correctCount === totalQuestions) {
+                comment = `Selamat <strong>${studentName}</strong>! Nilai sempurna. Kamu memiliki ketajaman logika yang sangat solid dan sudah siap tempur menghadapi OSN-K Informatika! 🚀`;
+            } else if (correctCount >= 4) {
+                comment = `Kerja bagus <strong>${studentName}</strong>! Pemahaman kamu pada materi kombinatorika dan rekurensi sudah di atas rata-rata. Sedikit polesan lagi kamu bisa mengamankan tiket provinsi! 🌟`;
+            } else {
+                comment = `Tetap semangat <strong>${studentName}</strong>. Karakteristik soal OSN memang membutuhkan ketelatenan analisis tingkat tinggi. Yuk, baca ulang pembahasannya untuk memperkaya strategi pemecahan masalah kamu! 📚`;
+            }
+            
+            commentaryTxt.innerHTML = comment;
+            scoreBoard.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetSimulasi() {
+            location.reload();
+        }
+    </script>
+</body>
